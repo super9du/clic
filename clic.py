@@ -55,9 +55,6 @@ with open(license, "r", encoding="utf-8") as f:
     license_data = f.read().format_map(dic)
     license_data_lines = license_data.splitlines()
 
-with open(os.path.join(package, "LICENSE"), "x", encoding="utf-8") as f:
-    f.write(license_data)
-
 
 def append_license(filename: str):
     with open(filename, "r+", encoding="utf-8") as f:
