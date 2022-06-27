@@ -29,3 +29,7 @@ pip install -r requirements.txt
 
 license-template 需要放在 licenses 目录下，且每个 license-template 都需要在模板中添加 `{year}` `{author}`
  `{software_name}` 到合适的位置。
+
+ ## 许可证
+
+ 本程序使用“木兰宽松许可证，第2版”，详细内容见本程序根目录下的 LICENSE 文件。

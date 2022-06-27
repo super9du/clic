@@ -31,3 +31,7 @@ for example:
 
 License-templates need to be placed in the licenses directory, and each license-template
 needs to add '{year}' '{author}' '{software_name}' to the template to the appropriate location.
+
+## License
+
+Mulan Permissive Software License，Version 2. See LICENSE for detail.
