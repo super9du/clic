@@ -43,14 +43,56 @@ parser.add_argument(
 args = parser.parse_args()
 
 dic = args.__dict__.copy()
+# 获取 license 模板路径
 license = dic.pop(LICENSE)
+# 获取 package 路径
 package = dic.pop(PACKAGE)
+# key 为后缀名，value 为对应后缀的 license_data
+license_data_map: dict[str, str] = {}
 
-# 生成 LICENSE 文件
+# 生成最原始的 LICENSE 数据
 with open(license, "r", encoding="utf-8") as f:
-    license = f.read().format_map(dic)
+    license_data = f.read().format_map(dic)
+    license_data_lines = license_data.splitlines()
 
 with open(os.path.join(package, "LICENSE"), "x", encoding="utf-8") as f:
-    f.write(license)
-    
+    f.write(license_data)
 
+
+def append_license(filename: str):
+    with open(filename, "r+", encoding="utf-8") as f:
+        postfix = os.path.splitext(filename)[1]
+        if not license_data_map.get(postfix):
+            if postfix == ".java":
+                data = ["/*"]
+                data.extend([f" * {line}" for line in license_data_lines])
+                data.append(" */")
+                data.append("\n")
+                license_data_map[".java"] = "\n".join(data)
+            elif postfix == ".go":
+                data = [f"// {line}" for line in license_data_lines]
+                data.append("\n")
+                license_data_map[".go"] = "\n".join(data)
+            elif postfix == ".py":
+                data = [f"# {line}" for line in license_data_lines]
+                data.append("\n")
+                license_data_map[".py"] = "\n".join(data)
+        val = license_data_map.get(postfix)
+        if val:
+            old = f.read()
+            f.seek(0)
+            f.writelines(val)
+            f.write(old)
+
+
+def reverse_search(filepath: str):
+    for filename in os.listdir(filepath):
+        # 默认不遍历以点号开头的文件或文件夹
+        if filename.startswith("."):
+            continue
+        fp = os.path.join(filepath, filename)
+        append_license(fp) if os.path.isfile(fp) else reverse_search(fp)
+
+
+# 遍历 package 目录
+reverse_search(package)
