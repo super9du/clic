@@ -1,3 +1,13 @@
+# Copyright (c) 2022 super9du
+# clic is licensed under Mulan PSL v2.
+# You can use this software according to the terms and conditions of the Mulan PSL v2.
+# You may obtain a copy of Mulan PSL v2 at:
+#          http://license.coscl.org.cn/MulanPSL2
+# THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND,
+# EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
+# MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
+# See the Mulan PSL v2 for more details.
+
 import argparse, locale, yaml
 import os
 
@@ -51,7 +61,7 @@ package = dic.pop(PACKAGE)
 license_data_map: dict[str, str] = {}
 
 # 生成最原始的 LICENSE 数据
-with open(license, "r", encoding="utf-8") as f:
+with open(os.path.join("licenses", license), "r", encoding="utf-8") as f:
     license_data = f.read().format_map(dic)
     license_data_lines = license_data.splitlines()
 

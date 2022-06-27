@@ -26,3 +26,6 @@ pip install -r requirements.txt
 ```shell 
 .\clic.py -l MulanPSL2 -p ./test  -y 2022 -a super9du -s clic
 ```
+
+license-template 需要放在 licenses 目录下，且每个 license-template 都需要在模板中添加 `{year}` `{author}`
+ `{software_name}` 到合适的位置。

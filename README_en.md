@@ -28,3 +28,6 @@ for example:
 ```shell
 .\clic.py -l MulanPSL2 -p ./test  -y 2022 -a super9du -s clic
 ```
+
+License-templates need to be placed in the licenses directory, and each license-template
+needs to add '{year}' '{author}' '{software_name}' to the template to the appropriate location.
