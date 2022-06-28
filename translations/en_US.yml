@@ -1,5 +1,5 @@
 description: "Create an opensource license for source code"
-license: "a license template file"
+license: "a license template name"
 package: "the path to the package that needs to add the license"
 year: "the year of the first publication of your software"
 author: "your name identified as the copyright owner"

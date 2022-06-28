@@ -1,5 +1,6 @@
+# clic: An easy-to-use tool for adding license to source code.
 # Copyright (c) 2022 super9du
-# clic is licensed under Mulan PSL v2.
+# Licensed under Mulan PSL v2.
 # You can use this software according to the terms and conditions of the Mulan PSL v2.
 # You may obtain a copy of Mulan PSL v2 at:
 #          http://license.coscl.org.cn/MulanPSL2
@@ -8,8 +9,7 @@
 # MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 # See the Mulan PSL v2 for more details.
 
-import argparse, locale, yaml
-import os
+import argparse, locale, yaml, os
 
 LOCALE = locale.getdefaultlocale()[0] or "zh_CN"
 
@@ -22,12 +22,14 @@ SOFTWARE_NAME = "software_name"
 
 DEFAULT_DESC = {
     DESC: "为源码创建开源许可协议",
-    LICENSE: "许可协议文件模板",
+    LICENSE: "许可协议文件模板名称",
     PACKAGE: "需要添加许可协议的包的路径",
     YEAR: "首次发表年份",
     AUTHOR: "版权人的名字",
     SOFTWARE_NAME: "被开源的软件名",
 }
+
+SUPPORTED_LICENSE = [os.path.splitext(s)[0] for s in os.listdir("licenses")]
 
 translation: dict[str, str] = {}
 
@@ -43,7 +45,13 @@ def get_description(key: str) -> str:
 
 
 parser = argparse.ArgumentParser(description=get_description(DESC))
-parser.add_argument("-l", f"--{LICENSE}", required=True, help=get_description(LICENSE))
+parser.add_argument(
+    "-l",
+    f"--{LICENSE}",
+    required=True,
+    choices=SUPPORTED_LICENSE,
+    help=get_description(LICENSE),
+)
 parser.add_argument("-p", f"--{PACKAGE}", required=True, help=get_description(PACKAGE))
 parser.add_argument("-y", f"--{YEAR}", required=True, help=get_description(YEAR))
 parser.add_argument("-a", f"--{AUTHOR}", required=True, help=get_description(AUTHOR))
@@ -53,7 +61,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 dic = args.__dict__.copy()
-# 获取 license 模板路径
+# 获取 license 模板名
 license = dic.pop(LICENSE)
 # 获取 package 路径
 package = dic.pop(PACKAGE)
@@ -61,7 +69,7 @@ package = dic.pop(PACKAGE)
 license_data_map: dict[str, str] = {}
 
 # 生成最原始的 LICENSE 数据
-with open(os.path.join("licenses", license), "r", encoding="utf-8") as f:
+with open(os.path.join("licenses", f"{license}.txt"), "r", encoding="utf-8") as f:
     license_data = f.read().format_map(dic)
     license_data_lines = license_data.splitlines()
 
@@ -103,3 +111,5 @@ def reverse_search(filepath: str):
 
 # 遍历 package 目录
 reverse_search(package)
+
+print("SUCCESS!")
