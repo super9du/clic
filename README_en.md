@@ -1,11 +1,10 @@
-# clic: A Tool to Easily Create Open Source Licenses
+# clic: An easy-to-use tool for adding license to source code.
 
-clic is an abbreviation for create license. Used to help people who want to open source 
-their code to generate open source code that meets the requirements of open source. 
-This tool adds the specified open source license to the beginning of all source code. 
-At present, it is simply implemented to add Java, golang, and Python source code. There 
-should also be a complete open source license called LICENSE in the root directory of 
-the source code, which needs to be created manually.
+clic is an abbreviation for create license. Used to help people who want to open source their code to generate open source code that meets the requirements of open source.
+
+Most people's open source is actually non-standard. In general, when we use an open source license to open source, we need to create a complete open source license called LICENSE under the source root directory, and also add a simple description of the license to each source file to declare that the source code is open source.
+
+What this tool can do is add the specified open source license to the head of all source code. At present, it is simply implemented to add Java, golang, and Python source code. License in the root directory of the source code needs to be created manually.
 
 ## Usage
 
