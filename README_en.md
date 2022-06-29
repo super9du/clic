@@ -22,7 +22,28 @@ pip install -r requirements.txt
 ./clic.py -l <license-template-name> -p <source code package> -y <year> -a <author> -s <software-name>
 ```
 
-for example:
+Show help:
+
+```bash
+> .\clic.py -h
+usage: clic.py [-h] -l {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2} -p PACKAGE -y YEAR -a AUTHOR -s SOFTWARE_NAME
+
+Create an opensource license for source code
+
+options:
+  -h, --help            show this help message and exit
+  -l {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2}, --license {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2}
+                        a license template name
+  -p PACKAGE, --package PACKAGE
+                        the path to the package that needs to add the license
+  -y YEAR, --year YEAR  the year of the first publication of your software
+  -a AUTHOR, --author AUTHOR
+                        your name identified as the copyright owner
+  -s SOFTWARE_NAME, --software_name SOFTWARE_NAME
+                        your software name
+```
+
+Example:
 
 ```shell
 .\clic.py -l MulanPSL2 -p ./test  -y 2022 -a super9du -s clic

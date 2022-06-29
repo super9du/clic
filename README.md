@@ -26,7 +26,28 @@ pip install -r requirements.txt
 ./clic.py -l <license-template-name> -p <source code package> -y <year> -a <author> -s <software-name>
 ```
 
-比如这样：
+查看帮助:
+
+```powershell
+> .\clic.py -h
+usage: clic.py [-h] -l {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2} -p PACKAGE -y YEAR -a AUTHOR -s SOFTWARE_NAME
+
+为源码创建开源许可协议
+
+options:
+  -h, --help            show this help message and exit
+  -l {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2}, --license {Apache2,BSD-3-Clause,GPLv3,LGPLv2,MIT,MulanPSL2}
+                        许可协议文件模板名称
+  -p PACKAGE, --package PACKAGE
+                        需要添加许可协议的包的路径
+  -y YEAR, --year YEAR  首次发表年份
+  -a AUTHOR, --author AUTHOR
+                        版权人的名字
+  -s SOFTWARE_NAME, --software_name SOFTWARE_NAME
+                        被开源的软件名
+```
+
+例：
 
 ```shell 
 .\clic.py -l MulanPSL2 -p ./test  -y 2022 -a super9du -s clic
